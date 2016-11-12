@@ -1,0 +1,61 @@
+{
+  "name": "accept-language-negotiator",
+  "version": "0.0.1",
+  "description": "RFC4647 compliant Accept-Language parser for node",
+  "repository": {
+    "type": "git",
+    "url": "git+https://jayco77@bitbucket.org/jayco77/accept-language-node.git"
+  },
+  "keywords": [
+    "http",
+    "content negotiation",
+    "accept",
+    "language",
+    "accept-language",
+    "i18n",
+    "internationalization",
+    "locale",
+    "localization",
+    "rfc4647",
+    "rfc2616"
+  ],
+  "author": "Jason Jacob <jason.jacob1977@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/jayco77/accept-language-node#readme",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "NODE_ENV=test mocha --compilers js:babel-register --recursive",
+    "cov": "NODE_ENV=test COVERAGE=yes LOG_LEVEL=fatal istanbul cover --report html ./node_modules/.bin/_mocha -- --compilers js:babel-register --recursive && open coverage/index.html",
+    "lint": "eslint ./src/ ./test/ && echo Lint OK",
+    "compile": "babel src --out-dir dist --source-maps true",
+    "compile:watch": "babel src --out-dir dist --source-maps true --watch",
+    "audit": "nsp check",
+    "check": "npm test && npm run audit && npm outdated --depth 0",
+    "clean": "rm -rf node_modules/ && rm -rf coverage",
+    "pretest": "npm run lint",
+    "prepublish": "npm run compile && npm run check"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.7.5",
+    "babel-eslint": "^7.0.0",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-register": "^6.16.3",
+    "chai": "^3.5.0",
+    "chai-as-promised": "^5.3.0",
+    "dependency-check": "^2.5.1",
+    "eslint": "^3.8.0",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.4.1",
+    "istanbul": "^1.0.0-alpha.2",
+    "mocha": "^2.4.5",
+    "node-dev": "^3.1.0",
+    "nsp": "^2.3.0"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  }
+}

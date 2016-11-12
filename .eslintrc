@@ -1,0 +1,15 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "max-len": [2, 120, 2],
+    "comma-dangle": [2, "never"],
+    "object-curly-spacing": 0,
+    "new-cap": 0,
+    "arrow-body-style": ["error", "as-needed", { "requireReturnForObjectLiteral": true }],
+    "import/no-extraneous-dependencies": [2, { "devDependencies": true }],
+    "arrow-parens": 0,
+    "no-plusplus": 0,
+    "no-param-reassign": 0,
+    "no-bitwise": 0
+  }
+}
