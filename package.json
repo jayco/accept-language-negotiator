@@ -1,6 +1,6 @@
 {
   "name": "accept-language-negotiator",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "RFC4647 compliant Accept-Language parser for node",
   "repository": {
     "type": "git",
