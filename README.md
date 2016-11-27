@@ -1,4 +1,4 @@
-# accept-language
+# Accept Language Negotiator
 **RFC4647** compliant accept-language negotiator for parsing HTTP 
 Accept-Language header and returning matched lists or language.
 
@@ -107,7 +107,7 @@ const supportedLanguageTags = [
     'en'
     ];
     
-languagePriorityList('en-GB,en-US;q=0.7,fr-CA;q=0.8,en;q=0.5', supportedLanguageTags);
+basicFilter('en-GB,en-US;q=0.7,fr-CA;q=0.8,en;q=0.5', supportedLanguageTags);
 returns => [
              'en-GB',
              'fr-CA',
