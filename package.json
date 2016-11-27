@@ -4,7 +4,7 @@
   "description": "RFC4647 compliant Accept-Language parser for node",
   "repository": {
     "type": "git",
-    "url": "git+https://jayco77@bitbucket.org/jayco77/accept-language-node.git"
+    "url": "git+https://github.com/jayco/accept-language-negotiator"
   },
   "keywords": [
     "http",
@@ -21,7 +21,7 @@
   ],
   "author": "Jason Jacob <jason.jacob1977@gmail.com>",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/jayco77/accept-language-node#readme",
+  "homepage": "https://github.com/jayco/accept-language-negotiator#readme",
   "main": "dist/index.js",
   "scripts": {
     "test": "NODE_ENV=test mocha --compilers js:babel-register --recursive",
