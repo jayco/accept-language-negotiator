@@ -17,7 +17,7 @@ Accept-Language header and returning matched lists or language.
 
 ## Install
 ```sh
-npm i accept-language-node --save
+npm i accept-language-negotiator --save
 ```
 
 # API
