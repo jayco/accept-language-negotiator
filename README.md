@@ -1,4 +1,5 @@
-# Accept Language Negotiator
+# Accept Language Negotiator [![CircleCI](https://circleci.com/gh/jayco/accept-language-negotiator.svg?style=svg)](https://circleci.com/gh/jayco/accept-language-negotiator)
+
 **RFC4647** compliant accept-language negotiator for parsing HTTP 
 Accept-Language header and returning matched lists or language.
 
