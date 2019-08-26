@@ -1,4 +1,4 @@
-# Accept Language Negotiator [![CircleCI](https://circleci.com/gh/jayco/accept-language-negotiator.svg?style=svg)](https://circleci.com/gh/jayco/accept-language-negotiator)
+# Accept Language Negotiator [![CircleCI](https://circleci.com/gh/jayco/accept-language-negotiator.svg?style=svg)](https://circleci.com/gh/jayco/accept-language-negotiator) [![npm version](https://badge.fury.io/js/accept-language-negotiator.svg)](https://badge.fury.io/js/accept-language-negotiator) ![npm](https://img.shields.io/npm/dm/accept-language-negotiator)
 
 **RFC4647** compliant accept-language negotiator for parsing HTTP 
 Accept-Language header and returning matched lists or language.
