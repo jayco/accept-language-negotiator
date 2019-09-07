@@ -1,22 +1,42 @@
 /**
  * accept-language-negotiator
- * Copyright(c) 2016 Jason Glen Jacob
- * MIT Licensed
  */
 const WILDCARD = '*';
-const DEFAULT_WILDCARD = [{tag: WILDCARD, quality: 1}];
+const DEFAULT_WILDCARD = [{ tag: WILDCARD, quality: 1 }];
 const isType = (data, type) => Object.prototype.toString.call(data) === `[object ${type}]`;
-const isObject = (v) => isType(v, 'Object');
-const isString = (v) => isType(v, 'String');
-const specificitySort = (a, b) => (a.length < b.length);
-const tagSort = (a, b) => specificitySort(a.tag, b.tag);
+const isObject = v => isType(v, 'Object');
+const isString = v => isType(v, 'String');
 const tagEquality = (a, b) => a.toLowerCase() === b.toLowerCase();
 const prefixInTag = (range, tag) => tag.toLowerCase().indexOf(`${range}-`.toLowerCase()) !== -1;
-const isWild = (v) => (v === WILDCARD);
-const isWildTag = (v) => v.tag === WILDCARD;
-const qtyMatch = (a, b) => (a.quality === b.quality);
-const gteQty = (a, b) => (a.quality > b.quality);
-const rangeSort = (a, b) => ~~((isWildTag(b) || gteQty(b, a)) || (!isWildTag(a) && qtyMatch(a, b) && tagSort(a, b)));
+const isWild = v => v === WILDCARD;
+const isWildTag = v => v.tag === WILDCARD;
+const qtyMatch = (a, b) => a.quality === b.quality;
+const gteQty = (a, b) => a.quality > b.quality;
+
+/**
+ * Sort by length of given item
+ * @param {*} a language item
+ * @param {*} b language item
+ * @returns {Number}
+ */
+const lengthSort = (a, b) => {
+  if (a.length < b.length) return 1;
+  if (a.length > b.length) return -1;
+  return 0;
+};
+
+/**
+ * Run through range equalities and sort
+ * @param {Object} a language item
+ * @param {Object} b language item
+ * @returns {Number}
+ */
+const rangeSort = (a, b) => {
+  const value = ~~(isWildTag(b) || gteQty(b, a) || (!isWildTag(a) && qtyMatch(a, b) && lengthSort(a.tag, b.tag)));
+  if (value > 0) return 1;
+  if (value === 0) return -1;
+  return 0;
+};
 
 /**
  * Filters range tags that matches in the languagesTagsComparator
@@ -30,7 +50,7 @@ const rangeSort = (a, b) => ~~((isWildTag(b) || gteQty(b, a)) || (!isWildTag(a) 
  */
 function filterTags(rangeTags, index, array, languagesTagsComparator, splitRangeTags) {
   if (!rangeTags[index]) return array;
-  languagesTagsComparator((splitRangeTags ? rangeTags[index].tag.split('-') : rangeTags[index].tag), 0, array);
+  languagesTagsComparator(splitRangeTags ? rangeTags[index].tag.split('-') : rangeTags[index].tag, 0, array);
   return filterTags(rangeTags, ++index, array, languagesTagsComparator, splitRangeTags);
 }
 
@@ -42,14 +62,20 @@ function filterTags(rangeTags, index, array, languagesTagsComparator, splitRange
  */
 export function languagePriorityList(range) {
   function extractTag(rangeTag) {
-    const ensureParsedValue = (v) => (v < 1 ? v : 1);
-    const extractQuality = (q) => (q ? ensureParsedValue(parseFloat(q.split('q=')[1])) : 1);
+    const ensureParsedValue = v => (v < 1 ? v : 1);
+    const extractQuality = q => (q ? ensureParsedValue(parseFloat(q.split('q=')[1])) : 1);
     const matches = rangeTag.match(/^\s*([^\s\-;]+)(?:-([^\s;]+))?\s*(?:;(.*))?$/);
     if (!matches) return undefined;
-    return {tag: (matches[2] ? [matches[1], matches[2]].join('-') : matches[1]), quality: extractQuality(matches[3])};
+    return { tag: matches[2] ? [matches[1], matches[2]].join('-') : matches[1], quality: extractQuality(matches[3]) };
   }
 
-  return isString(range) ? range.split(',').map(extractTag).filter(isObject).sort(rangeSort) : DEFAULT_WILDCARD;
+  return isString(range)
+    ? range
+        .split(',')
+        .map(extractTag)
+        .filter(isObject)
+        .sort(rangeSort)
+    : DEFAULT_WILDCARD;
 }
 
 /**
@@ -114,7 +140,8 @@ export function extendedFilter(range, languageTags) {
 export function lookup(range, languageTags, defaultValue) {
   if (arguments.length !== 3) throw new Error('range:String, languageTags:Array, defaultValue:String required!');
   if (!Array.isArray(languageTags) || languageTags.length === 0) return defaultValue;
-  const sortedLangTags = languageTags.sort(specificitySort);
+
+  const sortedLangTags = languageTags.sort(lengthSort);
 
   function matchTag(rangeTags, langTags, index, array) {
     if (index >= langTags.length || index >= rangeTags.length) return array;
