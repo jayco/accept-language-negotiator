@@ -182,7 +182,7 @@ the request, the "default" value is returned.
 ```js
 import {lookup} from 'accept-language-node';
 
-const supportedLanguageTags = ['zh-Hant', 'zh';
+const supportedLanguageTags = ['zh-Hant', 'zh'];
 const defaultLanguage = 'en-US';    
 
 // match
