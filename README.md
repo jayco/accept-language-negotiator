@@ -39,7 +39,7 @@ quality 1 will be given as described in **RFC2616 14.4 Accept-Language**.
 ### Example:
 
 ```js
-import {languagePriorityList} from 'accept-language-node';
+import {languagePriorityList} from 'accept-language-negotiator';
 
 // value
 languagePriorityList('en-GB');
@@ -85,7 +85,7 @@ following the prefix is "-".
 ### Example:
 
 ```js
-import {basicFilter} from 'accept-language-node';
+import {basicFilter} from 'accept-language-negotiator';
 
 const supportedLanguageTags = [
     'de-DE', 
@@ -134,7 +134,7 @@ a particular language tag if each respective list of subtags matches.
 ### Example:
 
 ```js
-import {extendedFilter} from 'accept-language-node';
+import {extendedFilter} from 'accept-language-negotiator';
 
 const supportedLanguageTags = [
         'de',
@@ -180,7 +180,7 @@ the request, the "default" value is returned.
 ### Example:
 
 ```js
-import {lookup} from 'accept-language-node';
+import {lookup} from 'accept-language-negotiator';
 
 const supportedLanguageTags = ['zh-Hant', 'zh';
 const defaultLanguage = 'en-US';    
