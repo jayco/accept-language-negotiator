@@ -23,6 +23,7 @@
   "license": "MIT",
   "homepage": "https://github.com/jayco/accept-language-negotiator#readme",
   "main": "dist/index.js",
+  "module": "src/index.js",
   "scripts": {
     "test": "NODE_ENV=test mocha --require @babel/register --recursive",
     "cov": "NODE_ENV=test COVERAGE=yes LOG_LEVEL=fatal istanbul cover --report html ./node_modules/.bin/_mocha -- --require @babel/register --recursive && open coverage/index.html",
