@@ -282,6 +282,10 @@ describe('accept-language-node', () => {
       assert.strictEqual(lookup('de-CH', ['de-CH-1996'], 'en-US'), 'en-US', 'Fallback on default');
     });
 
+    it('Should match a language tag provided from the language list, or default', () => {
+      assert.strictEqual(lookup('en-US', ['en-GB', 'es'], 'ru'), 'ru', 'Fallback on default');
+    });
+
     it('Should not match on singleton', () => {
       assert.strictEqual(
         lookup('zh-Hant-CN-x-blah', ['zh-Hant-CN-x-private1-private2'], 'en-US'),
