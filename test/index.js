@@ -279,7 +279,7 @@ describe('accept-language-node', () => {
     });
 
     it('Should not match a language tag with greater specificity than the range tag', () => {
-      assert.strictEqual(lookup('de-CH', ['de-CH-1996'], 'en-US'), 'de-CH', 'expected correct specificity');
+      assert.strictEqual(lookup('de-CH', ['de-CH-1996'], 'en-US'), 'en-US', 'Fallback on default');
     });
 
     it('Should not match on singleton', () => {
